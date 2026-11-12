@@ -28,3 +28,9 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- Signed-in pages live under `src/routes/_authenticated/`; its `route.tsx` gate is client-only (`ssr: false`) and redirects to `/signin`, because the session lives in browser storage.
+- Auth state changes are handled by one `onAuthStateChange` listener in `src/routes/__root.tsx`; UI reads the user via `useSessionUser` (query key `session-user`) so the header reflects session state without extra listeners.
+- Reusable UI lives in `src/components/` with PascalCase filenames; design tokens and utilities (gradients, glow, `reveal`) live only in `src/styles.css`.
