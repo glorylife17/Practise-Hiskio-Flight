@@ -8,7 +8,7 @@ export function SiteHeader() {
   const { data: user } = useSessionUser();
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/60 bg-background/70 backdrop-blur-xl">
+    <header className="sticky top-0 z-40 border-b border-ivory/10 bg-sky-top/90 backdrop-blur-xl">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
         <BrandLogo />
         {user ? (

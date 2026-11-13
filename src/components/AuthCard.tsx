@@ -2,6 +2,7 @@ import { Link } from "react-router";
 import { useState, type FormEvent, type ReactNode } from "react";
 
 import { BrandLogo } from "@/components/BrandLogo";
+import { SkyBackdrop } from "@/components/SkyBackdrop";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -48,17 +49,16 @@ export function AuthCard({ mode, onSubmit, notice }: AuthCardProps) {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-12">
-      <div className="pointer-events-none absolute inset-0 bg-hero-glow" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-0 bg-grid" aria-hidden="true" />
+    <div className="relative isolate flex min-h-screen flex-col items-center justify-center overflow-hidden px-5 py-12">
+      <SkyBackdrop moonClassName="right-[6%] top-[6%] size-[clamp(8rem,20vw,16rem)]" />
 
       <div className="relative w-full max-w-sm">
         <div className="mb-8 flex justify-center">
           <BrandLogo />
         </div>
 
-        <div className="reveal is-visible rounded-2xl border border-border bg-card/80 p-7 shadow-card backdrop-blur">
-          <h1 className="text-2xl font-semibold tracking-tight">{c.title}</h1>
+        <div className="reveal is-visible marble rounded-2xl p-7">
+          <h1 className="font-display text-3xl font-semibold">{c.title}</h1>
           <p className="mt-1 text-sm text-muted-foreground">{c.subtitle}</p>
 
           {notice ? (
@@ -105,14 +105,17 @@ export function AuthCard({ mode, onSubmit, notice }: AuthCardProps) {
               </Button>
             </form>
           )}
-        </div>
 
-        <p className="mt-6 text-center text-sm text-muted-foreground">
-          {c.switchText}{" "}
-          <Link to={c.switchTo} className="font-medium text-primary-glow hover:underline">
-            {c.switchLabel}
-          </Link>
-        </p>
+          <p className="mt-6 border-t border-border pt-5 text-center text-sm text-muted-foreground">
+            {c.switchText}{" "}
+            <Link
+              to={c.switchTo}
+              className="font-medium text-primary underline-offset-4 hover:underline"
+            >
+              {c.switchLabel}
+            </Link>
+          </p>
+        </div>
       </div>
     </div>
   );

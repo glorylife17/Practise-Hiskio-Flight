@@ -3,7 +3,7 @@
  * - Keep every @import in this top block, above @theme and the rest of the file. Install an
  *   npm package before @importing its CSS. Never @import a remote URL (web fonts, CDN CSS): the
  *   build resolves @import from the filesystem. Load those with a <link> in the head() of
- *   src/routes/__root.tsx and name the family in a --font-* token in @theme inline below.
+ *   index.html and name the family in a --font-* token in @theme inline below.
  */
 @import "tailwindcss" source(none);
 @source "../src";
@@ -73,53 +73,71 @@
   --color-primary-glow: var(--primary-glow);
   --color-surface: var(--surface);
   --color-success: var(--success);
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --color-ivory: var(--ivory);
+  --color-sky-top: var(--sky-top);
+  --font-sans: "Noto Sans TC", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Cormorant Garamond", "Noto Serif TC", ui-serif, Georgia, serif;
 }
 
-/* Flight Price Notifier — near-black canvas, violet accent. Dark is the only theme. */
+/*
+ * Flight Price Notifier — "palace above the clouds" at dusk.
+ * Slate-blue sky fading to a gold horizon, a rising moon, a sea of ivory clouds;
+ * content sits on cloud-ivory "marble" with champagne-gold accents. Light is the only theme.
+ */
 :root {
-  --radius: 0.875rem;
-  --background: oklch(0.145 0.012 285);
-  --foreground: oklch(0.97 0.005 285);
-  --surface: oklch(0.18 0.016 285);
-  --card: oklch(0.185 0.018 285);
-  --card-foreground: oklch(0.97 0.005 285);
-  --popover: oklch(0.185 0.018 285);
-  --popover-foreground: oklch(0.97 0.005 285);
-  --primary: oklch(0.64 0.21 293);
-  --primary-glow: oklch(0.74 0.17 300);
-  --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.23 0.02 285);
-  --secondary-foreground: oklch(0.95 0.005 285);
-  --muted: oklch(0.22 0.015 285);
-  --muted-foreground: oklch(0.7 0.02 285);
-  --accent: oklch(0.26 0.04 293);
-  --accent-foreground: oklch(0.97 0.005 285);
-  --destructive: oklch(0.65 0.2 22);
-  --destructive-foreground: oklch(0.99 0 0);
-  --success: oklch(0.78 0.15 160);
-  --border: oklch(1 0 0 / 9%);
-  --input: oklch(1 0 0 / 13%);
-  --ring: oklch(0.64 0.21 293);
-  --chart-1: oklch(0.64 0.21 293);
-  --chart-2: oklch(0.74 0.17 300);
-  --chart-3: oklch(0.78 0.15 160);
-  --chart-4: oklch(0.8 0.15 80);
-  --chart-5: oklch(0.65 0.2 22);
-  --sidebar: oklch(0.18 0.016 285);
-  --sidebar-foreground: oklch(0.97 0.005 285);
-  --sidebar-primary: oklch(0.64 0.21 293);
-  --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.26 0.04 293);
-  --sidebar-accent-foreground: oklch(0.97 0.005 285);
-  --sidebar-border: oklch(1 0 0 / 9%);
-  --sidebar-ring: oklch(0.64 0.21 293);
+  --radius: 1rem;
+  --background: oklch(0.946 0.016 79.4);
+  --foreground: oklch(0.313 0.032 254.3);
+  --surface: oklch(0.98 0.009 84.6);
+  --card: oklch(0.98 0.009 84.6);
+  --card-foreground: oklch(0.313 0.032 254.3);
+  --popover: oklch(0.98 0.009 84.6);
+  --popover-foreground: oklch(0.313 0.032 254.3);
+  --primary: oklch(0.617 0.096 71.6);
+  --primary-glow: oklch(0.832 0.081 81.2);
+  --primary-foreground: oklch(0.255 0.025 74.3);
+  --secondary: oklch(0.921 0.021 81.8);
+  --secondary-foreground: oklch(0.313 0.032 254.3);
+  --muted: oklch(0.915 0.021 81.8);
+  --muted-foreground: oklch(0.516 0.027 252.4);
+  --accent: oklch(0.923 0.039 83.8);
+  --accent-foreground: oklch(0.313 0.032 254.3);
+  --destructive: oklch(0.532 0.143 28.2);
+  --destructive-foreground: oklch(0.98 0.009 84.6);
+  --success: oklch(0.533 0.09 165.4);
+  --border: oklch(0.872 0.033 81);
+  --input: oklch(0.835 0.038 80.6);
+  --ring: oklch(0.617 0.096 71.6);
+  --chart-1: oklch(0.617 0.096 71.6);
+  --chart-2: oklch(0.548 0.042 251);
+  --chart-3: oklch(0.533 0.09 165.4);
+  --chart-4: oklch(0.841 0.077 71);
+  --chart-5: oklch(0.532 0.143 28.2);
+  --sidebar: oklch(0.98 0.009 84.6);
+  --sidebar-foreground: oklch(0.313 0.032 254.3);
+  --sidebar-primary: oklch(0.617 0.096 71.6);
+  --sidebar-primary-foreground: oklch(0.255 0.025 74.3);
+  --sidebar-accent: oklch(0.923 0.039 83.8);
+  --sidebar-accent-foreground: oklch(0.313 0.032 254.3);
+  --sidebar-border: oklch(0.872 0.033 81);
+  --sidebar-ring: oklch(0.617 0.096 71.6);
 
-  --gradient-primary: linear-gradient(135deg, var(--primary), var(--primary-glow));
-  --gradient-text: linear-gradient(120deg, var(--foreground) 30%, var(--primary-glow));
-  --gradient-glow: radial-gradient(60% 50% at 50% 0%, color-mix(in oklab, var(--primary) 32%, transparent), transparent 70%);
-  --shadow-glow: 0 10px 40px -10px color-mix(in oklab, var(--primary) 55%, transparent);
-  --shadow-card: 0 1px 0 0 oklch(1 0 0 / 6%) inset, 0 20px 50px -24px oklch(0 0 0 / 70%);
+  /* Sky, moon and cloud palette sampled from the reference image. */
+  --ivory: oklch(0.977 0.011 84.6);
+  --sky-top: oklch(0.369 0.042 251.6);
+  --sky-mid: oklch(0.548 0.042 251);
+  --sky-haze: oklch(0.735 0.012 90);
+  --horizon: oklch(0.841 0.077 71);
+  --cloud: oklch(0.938 0.024 77.5);
+  --moon: oklch(0.962 0.01 87.5);
+  --moon-shadow: oklch(0.84 0.006 239.8);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.854 0.077 82.7), oklch(0.695 0.099 73.4));
+  --gradient-text: linear-gradient(175deg, var(--ivory) 40%, var(--primary-glow));
+  --shadow-glow: 0 10px 30px -12px color-mix(in oklab, oklch(0.695 0.099 73.4) 70%, transparent);
+  --shadow-card:
+    0 1px 0 0 oklch(1 0 0 / 80%) inset,
+    0 24px 48px -28px color-mix(in oklab, oklch(0.45 0.06 70) 45%, transparent);
 }
 
 @layer base {
@@ -128,7 +146,7 @@
   }
 
   html {
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
@@ -137,14 +155,15 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
   }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
 }
 
 @utility bg-gradient-primary {
   background-image: var(--gradient-primary);
-}
-
-@utility bg-hero-glow {
-  background-image: var(--gradient-glow);
 }
 
 @utility text-gradient {
@@ -162,12 +181,89 @@
   box-shadow: var(--shadow-card);
 }
 
-@utility bg-grid {
+/* Dusk sky: slate overhead, haze, then the gold band at the horizon. */
+@utility bg-sky {
   background-image:
-    linear-gradient(to right, oklch(1 0 0 / 4%) 1px, transparent 1px),
-    linear-gradient(to bottom, oklch(1 0 0 / 4%) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(70% 60% at 50% 0%, black, transparent 75%);
+    radial-gradient(
+      120% 55% at 80% 100%,
+      color-mix(in oklab, var(--horizon) 80%, transparent),
+      transparent 60%
+    ),
+    linear-gradient(
+      180deg,
+      var(--sky-top) 0%,
+      var(--sky-mid) 50%,
+      var(--sky-haze) 70%,
+      var(--horizon) 84%,
+      var(--background) 100%
+    );
+}
+
+/* The moon: a lit sphere with soft maria, haloed by haze. */
+@utility moon {
+  position: absolute;
+  border-radius: 9999px;
+  background-image:
+    radial-gradient(30% 22% at 38% 40%, oklch(0.83 0.006 240 / 28%), transparent 75%),
+    radial-gradient(22% 30% at 62% 58%, oklch(0.85 0.006 240 / 24%), transparent 75%),
+    radial-gradient(34% 18% at 46% 72%, oklch(0.86 0.006 240 / 20%), transparent 75%),
+    radial-gradient(16% 14% at 70% 32%, oklch(0.85 0.006 240 / 18%), transparent 75%),
+    radial-gradient(circle at 34% 30%, var(--moon) 0%, var(--moon) 40%, var(--moon-shadow) 92%);
+  box-shadow:
+    0 0 50px 6px oklch(0.96 0.01 87 / 30%),
+    0 0 140px 36px oklch(0.92 0.025 82 / 20%);
+  opacity: 0.88;
+  animation: moonrise 2.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+@keyframes moonrise {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+  }
+  to {
+    opacity: 0.88;
+    transform: none;
+  }
+}
+
+/* Sea of clouds along the bottom edge, fading into the page's cloud-ivory. */
+@utility cloud-sea {
+  position: absolute;
+  inset-inline: -10%;
+  bottom: -32px;
+  height: 40%;
+  background-image:
+    radial-gradient(30% 55% at 8% 70%, var(--cloud), transparent 70%),
+    radial-gradient(26% 50% at 30% 60%, oklch(0.95 0.03 78), transparent 70%),
+    radial-gradient(32% 60% at 55% 75%, var(--cloud), transparent 70%),
+    radial-gradient(24% 45% at 78% 58%, oklch(0.92 0.045 75), transparent 70%),
+    radial-gradient(30% 55% at 96% 72%, var(--cloud), transparent 70%),
+    linear-gradient(180deg, transparent 0%, var(--background) 62%);
+  filter: blur(6px);
+}
+
+/* Marble panel: ivory with a hairline of gold along the top edge. */
+@utility marble {
+  background-color: var(--card);
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in oklab, var(--primary-glow) 85%, transparent),
+      transparent
+    ),
+    linear-gradient(170deg, oklch(0.99 0.006 85), var(--card) 55%, oklch(0.965 0.016 80));
+  background-size:
+    100% 2px,
+    100% 100%;
+  background-position: top;
+  background-repeat: no-repeat;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-card);
 }
 
 /* Fade-in on scroll: Reveal adds .is-visible once in view. */
@@ -185,17 +281,5 @@
     opacity: 1;
     transform: none;
     transition: none;
-  }
-}
-
-@keyframes float-soft {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-6px); }
-}
-
-@utility animate-float-soft {
-  animation: float-soft 6s ease-in-out infinite;
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
   }
 }

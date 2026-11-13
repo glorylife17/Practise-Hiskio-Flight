@@ -16,8 +16,9 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        hero: "bg-gradient-primary text-primary-foreground shadow-glow hover:brightness-110 hover:-translate-y-px transition-all",
-        glass: "border border-border bg-secondary/60 text-foreground backdrop-blur hover:bg-secondary",
+        hero: "bg-gradient-primary text-primary-foreground shadow-glow hover:brightness-105 hover:-translate-y-px transition-all",
+        // For use over the sky backdrop: moonlit glass with ivory text.
+        glass: "border border-ivory/45 bg-sky-top/35 text-ivory backdrop-blur hover:bg-sky-top/50",
       },
       size: {
         default: "h-9 px-4 py-2",

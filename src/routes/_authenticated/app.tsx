@@ -3,6 +3,7 @@ import { LogOut, Radar } from "lucide-react";
 import { useRouteLoaderData } from "react-router";
 
 import { BrandLogo } from "@/components/BrandLogo";
+import { SkyBackdrop } from "@/components/SkyBackdrop";
 import { Button } from "@/components/ui/button";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { useSignOut } from "@/hooks/useSignOut";
@@ -21,10 +22,13 @@ export function AppDashboard() {
   const signOut = useSignOut();
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 bg-hero-glow" aria-hidden="true" />
+    <div className="relative isolate min-h-screen overflow-hidden">
+      <SkyBackdrop
+        className="h-[30rem]"
+        moonClassName="right-[7%] top-[18%] size-[clamp(7rem,18vw,13rem)]"
+      />
 
-      <header className="relative border-b border-border/60 bg-background/70 backdrop-blur-xl">
+      <header className="relative border-b border-ivory/15 bg-sky-top/60 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5">
           <BrandLogo />
           <Button variant="glass" size="sm" onClick={signOut}>
@@ -36,20 +40,19 @@ export function AppDashboard() {
 
       <main className="relative mx-auto max-w-3xl px-5 py-20">
         <div className="reveal is-visible">
-          <h1 className="break-all text-3xl font-semibold tracking-tight sm:text-4xl">
+          <h1 className="break-all font-display text-4xl font-semibold text-ivory sm:text-5xl">
             Hi <span className="text-gradient">{user.email}</span>
           </h1>
 
-          <div className="mt-10 rounded-2xl border border-border bg-card/80 p-8 shadow-card">
-            <div className="grid size-12 place-items-center rounded-xl bg-accent">
-              <Radar className="size-6 text-primary-glow" aria-hidden="true" />
+          <div className="marble mt-24 rounded-2xl p-8">
+            <div className="grid size-12 place-items-center rounded-full border border-primary/30 bg-accent">
+              <Radar className="size-6 text-primary" aria-hidden="true" />
             </div>
-            <p className="mt-6 text-lg leading-relaxed">
+            <p className="mt-6 font-display text-xl leading-relaxed">
               你的航線追蹤儀表板即將上線 — 下一個里程碑會加上訂閱航線的功能。
             </p>
             <p className="mt-2 text-sm text-muted-foreground">
-              Your dashboard is coming soon. Route-subscription will be added in the next
-              milestone.
+              Your dashboard is coming soon. Route-subscription will be added in the next milestone.
             </p>
           </div>
         </div>
