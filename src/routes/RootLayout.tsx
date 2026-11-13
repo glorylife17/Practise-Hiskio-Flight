@@ -5,7 +5,6 @@ import { Link, Outlet, ScrollRestoration, useRevalidator, useRouteError } from "
 import { Toaster } from "@/components/ui/sonner";
 import { usePageMeta } from "@/hooks/usePageMeta";
 import { supabase } from "@/integrations/supabase/client";
-import { reportLovableError } from "@/lib/lovable-error-reporting";
 
 export function NotFound() {
   usePageMeta({
@@ -37,9 +36,8 @@ export function NotFound() {
 export function RootErrorBoundary() {
   const error = useRouteError();
   const revalidator = useRevalidator();
-  console.error(error);
   useEffect(() => {
-    reportLovableError(error, { boundary: "react_router_root_error_element" });
+    console.error(error);
   }, [error]);
 
   return (
