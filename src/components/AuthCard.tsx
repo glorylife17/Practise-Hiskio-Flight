@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router";
 import { useState, type FormEvent, type ReactNode } from "react";
 
 import { BrandLogo } from "@/components/BrandLogo";

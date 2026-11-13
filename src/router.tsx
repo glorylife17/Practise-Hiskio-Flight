@@ -1,18 +1,43 @@
-import { QueryClient } from "@tanstack/react-query";
-import { createRouter } from "@tanstack/react-router";
-import { routeTree } from "./routeTree.gen";
+import { Outlet, redirect, type RouteObject } from "react-router";
 
-export const getRouter = () => {
-  // One client per request: a module-level QueryClient leaks cached data between SSR requests.
-  const queryClient = new QueryClient();
+import { supabase } from "@/integrations/supabase/client";
+import { NotFound, RootErrorBoundary, RootLayout } from "@/routes/RootLayout";
+import { AppDashboard } from "@/routes/_authenticated/app";
+import { LandingPage } from "@/routes/index";
+import { SignInPage } from "@/routes/signin";
+import { AUTHENTICATED_ROUTE_ID } from "@/routes/route-ids";
+import { SignUpPage } from "@/routes/signup";
 
-  const router = createRouter({
-    routeTree,
-    context: { queryClient },
-    scrollRestoration: true,
-    // Lets Query own freshness; set caching defaults on the QueryClient, not the router.
-    defaultPreloadStaleTime: 0,
-  });
+// Session lives in browser storage, so these guards run client-side before the page renders.
+async function redirectIfSignedIn() {
+  const { data } = await supabase.auth.getSession();
+  if (data.session) throw redirect("/app");
+  return null;
+}
 
-  return router;
-};
+async function requireUser() {
+  const { data } = await supabase.auth.getUser();
+  if (!data.user) throw redirect("/signin");
+  return { user: data.user };
+}
+
+export const routes: RouteObject[] = [
+  {
+    id: "root",
+    element: <RootLayout />,
+    errorElement: <RootErrorBoundary />,
+    hydrateFallbackElement: null,
+    children: [
+      { index: true, element: <LandingPage /> },
+      { path: "signin", loader: redirectIfSignedIn, element: <SignInPage /> },
+      { path: "signup", loader: redirectIfSignedIn, element: <SignUpPage /> },
+      {
+        id: AUTHENTICATED_ROUTE_ID,
+        loader: requireUser,
+        element: <Outlet />,
+        children: [{ path: "app", element: <AppDashboard /> }],
+      },
+      { path: "*", element: <NotFound /> },
+    ],
+  },
+];

@@ -1,30 +1,10 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
 import { BellRing, CalendarX2, Radar, TrendingDown } from "lucide-react";
 
 import { Reveal } from "@/components/Reveal";
 import { SiteHeader } from "@/components/SiteHeader";
 import { Button } from "@/components/ui/button";
-
-export const Route = createFileRoute("/")({
-  head: () => ({
-    meta: [
-      { title: "Flight Price Notifier — 機票降價通知" },
-      {
-        name: "description",
-        content:
-          "Set a route and a target price — we email you when the fare drops. 設定航線與目標價，機票降價就通知你。",
-      },
-      { property: "og:title", content: "Flight Price Notifier — 機票降價通知" },
-      {
-        property: "og:description",
-        content: "Set a route and a target price — we email you when the fare drops.",
-      },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary_large_image" },
-    ],
-  }),
-  component: LandingPage,
-});
+import { usePageMeta } from "@/hooks/usePageMeta";
+import { Link } from "react-router";
 
 const features = [
   {
@@ -47,7 +27,15 @@ const features = [
   },
 ];
 
-function LandingPage() {
+export function LandingPage() {
+  usePageMeta({
+    title: "Flight Price Notifier — 機票降價通知",
+    description:
+      "Set a route and a target price — we email you when the fare drops. 設定航線與目標價，機票降價就通知你。",
+    ogTitle: "Flight Price Notifier — 機票降價通知",
+    ogDescription: "Set a route and a target price — we email you when the fare drops.",
+  });
+
   return (
     <div className="min-h-screen">
       <SiteHeader />

@@ -1,26 +1,16 @@
-import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
+import { useNavigate } from "react-router";
 
 import { AuthCard } from "@/components/AuthCard";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/signin")({
-  ssr: false,
-  beforeLoad: async () => {
-    const { data } = await supabase.auth.getSession();
-    if (data.session) throw redirect({ to: "/app" });
-  },
-  head: () => ({
-    meta: [
-      { title: "Sign in — Flight Price Notifier" },
-      { name: "description", content: "Sign in to Flight Price Notifier to manage your fare alerts." },
-      { property: "og:title", content: "Sign in — Flight Price Notifier" },
-      { property: "og:description", content: "Sign in to manage your flight fare alerts." },
-    ],
-  }),
-  component: SignInPage,
-});
-
-function SignInPage() {
+export function SignInPage() {
+  usePageMeta({
+    title: "Sign in — Flight Price Notifier",
+    description: "Sign in to Flight Price Notifier to manage your fare alerts.",
+    ogTitle: "Sign in — Flight Price Notifier",
+    ogDescription: "Sign in to manage your flight fare alerts.",
+  });
   const navigate = useNavigate();
 
   return (
@@ -29,7 +19,7 @@ function SignInPage() {
       onSubmit={async (email, password) => {
         const { error } = await supabase.auth.signInWithPassword({ email, password });
         if (error) return "Email 或密碼不正確 · Invalid email or password.";
-        navigate({ to: "/app" });
+        void navigate("/app");
         return null;
       }}
     />

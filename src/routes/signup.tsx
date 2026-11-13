@@ -1,27 +1,17 @@
-import { createFileRoute, redirect, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
+import { useNavigate } from "react-router";
 
 import { AuthCard } from "@/components/AuthCard";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { supabase } from "@/integrations/supabase/client";
 
-export const Route = createFileRoute("/signup")({
-  ssr: false,
-  beforeLoad: async () => {
-    const { data } = await supabase.auth.getSession();
-    if (data.session) throw redirect({ to: "/app" });
-  },
-  head: () => ({
-    meta: [
-      { title: "Sign up — Flight Price Notifier" },
-      { name: "description", content: "Create a Flight Price Notifier account and get emailed when fares drop." },
-      { property: "og:title", content: "Sign up — Flight Price Notifier" },
-      { property: "og:description", content: "Create an account and get emailed when fares drop." },
-    ],
-  }),
-  component: SignUpPage,
-});
-
-function SignUpPage() {
+export function SignUpPage() {
+  usePageMeta({
+    title: "Sign up — Flight Price Notifier",
+    description: "Create a Flight Price Notifier account and get emailed when fares drop.",
+    ogTitle: "Sign up — Flight Price Notifier",
+    ogDescription: "Create an account and get emailed when fares drop.",
+  });
   const navigate = useNavigate();
   const [checkEmail, setCheckEmail] = useState(false);
 
@@ -45,7 +35,7 @@ function SignUpPage() {
         });
         if (error) return error.message;
         if (data.session) {
-          navigate({ to: "/app" });
+          void navigate("/app");
         } else {
           setCheckEmail(true);
         }

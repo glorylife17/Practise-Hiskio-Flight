@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link } from "react-router";
 
 import { BrandLogo } from "@/components/BrandLogo";
 import { Button } from "@/components/ui/button";

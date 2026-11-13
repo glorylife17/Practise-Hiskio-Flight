@@ -1,25 +1,23 @@
-import { createFileRoute } from "@tanstack/react-router";
+import type { User } from "@supabase/supabase-js";
 import { LogOut, Radar } from "lucide-react";
+import { useRouteLoaderData } from "react-router";
 
 import { BrandLogo } from "@/components/BrandLogo";
 import { Button } from "@/components/ui/button";
+import { usePageMeta } from "@/hooks/usePageMeta";
 import { useSignOut } from "@/hooks/useSignOut";
+import { AUTHENTICATED_ROUTE_ID } from "@/routes/route-ids";
 
-export const Route = createFileRoute("/_authenticated/app")({
-  head: () => ({
-    meta: [
-      { title: "Dashboard — Flight Price Notifier" },
-      { name: "description", content: "Your Flight Price Notifier dashboard." },
-      { property: "og:title", content: "Dashboard — Flight Price Notifier" },
-      { property: "og:description", content: "Your Flight Price Notifier dashboard." },
-      { name: "robots", content: "noindex" },
-    ],
-  }),
-  component: AppDashboard,
-});
-
-function AppDashboard() {
-  const { user } = Route.useRouteContext();
+export function AppDashboard() {
+  usePageMeta({
+    title: "Dashboard — Flight Price Notifier",
+    description: "Your Flight Price Notifier dashboard.",
+    ogTitle: "Dashboard — Flight Price Notifier",
+    ogDescription: "Your Flight Price Notifier dashboard.",
+    robots: "noindex",
+  });
+  // The parent "authenticated" route's loader redirects to /signin when there is no user.
+  const { user } = useRouteLoaderData(AUTHENTICATED_ROUTE_ID) as { user: User };
   const signOut = useSignOut();
 
   return (
